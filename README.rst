@@ -19,4 +19,4 @@ To run the script: ::
 
  python aais.py
 
-That will produce a SysInventory.yml yaml inventory file in the same directory.
+That will produce a ``SysInventory.yml`` yaml inventory file in the same directory.
