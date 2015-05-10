@@ -6,7 +6,7 @@ Intro
 =====
 
 A python based Auto Adjust Inventory for Suricata IDS/IPS/NSM. 
-The idea is to be able to collect useful for Suricata information at start up and 
+The idea is to be able to collect useful for Suricata information at start up and document that in a yaml inventory file.
 
 
 
