@@ -11,10 +11,7 @@
 # sudo yum install PyYAML (on CentOS/Fedora/RedHat)
 
 import yaml
-from Harvest.HarvestOS import harvestOS
-from Harvest.HarvestCPU import harvestCPU
-from Harvest.HarvestMemory import harvestMemory
-from Harvest.HarvestNIC import harvestNIC
+import Harvest
 
 
 if __name__ == "__main__":
@@ -22,12 +19,12 @@ if __name__ == "__main__":
   inventory = {}
   inventory["OS"] = {}
   
-  osArch = harvestOS().getOSArch()
+  osArch = Harvest.OS().getOSArch()
   inventory["OS"]["Architecture"] = osArch[0]
   inventory["OS"]["Linkage"] = osArch[1]
   
   # system, node, release, version, machine, processor
-  osUname = harvestOS().getOSUname()
+  osUname = Harvest.OS().getOSUname()
   inventory["OS"]["System"] = osUname[0]
   inventory["OS"]["Node"] = osUname[1]
   inventory["OS"]["Release"] = osUname[2]
@@ -37,14 +34,14 @@ if __name__ == "__main__":
   inventory["OS"]["Processor"] = osUname[5]
   
   # distname,version,id
-  osLinux_dist = harvestOS().getOSLinux_distribution()
+  osLinux_dist = Harvest.OS().getOSLinux_distribution()
   inventory["OS"]["Distname"] = osLinux_dist[0]
   inventory["OS"]["Version"] = osLinux_dist[1]
   inventory["OS"]["Id"] = osLinux_dist[2]
   
   inventory["CPU"] = {}
   # model, frequency, num_cpu
-  systemCpu = harvestCPU().getCPU()
+  systemCpu = Harvest.CPU().getCPU()
   # note strip() is used below in order for the yaml.dump
   # to not put ' ' around the string
   inventory["CPU"]["Model"] = systemCpu[0].split('@')[0].strip()
@@ -53,14 +50,14 @@ if __name__ == "__main__":
   
   inventory["Memory"] = {}
   # a dict of /proc/meminfo
-  systemMemory = harvestMemory().getMemory()
+  systemMemory = Harvest.Memory().getMemory()
   #print systemMemory
   inventory["Memory"] = systemMemory 
   
   inventory["Interface_Interrupts"] = {}
   # a combined effort from HarvestNIC** functions
   # returns Interface : Interrupts dictionary
-  interfacesInterrupts = harvestNIC().getInterrupts()
+  interfacesInterrupts = Harvest.NIC().getInterrupts()
   inventory["Interface_Interrupts"] = interfacesInterrupts
    
   

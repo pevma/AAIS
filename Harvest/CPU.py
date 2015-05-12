@@ -8,7 +8,7 @@
 
 
 
-class harvestCPU:
+class CPU:
   
   # Important - by default python-yaml returns "True" or "Flase"
   # for any options set to "yes" or "no" and NOT the "yes" or "no" themselves
