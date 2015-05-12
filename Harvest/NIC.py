@@ -13,7 +13,7 @@ import sys
 import time
 import glob
 
-class harvestNIC:
+class NIC:
   
   def getInterrupts(self):
     f_interrupts = open("/proc/interrupts", "r")

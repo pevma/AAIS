@@ -8,7 +8,7 @@
 
 
 
-class harvestCPU:
+class CPU:
   
   # Important - by default python-yaml returns "True" or "Flase"
   # for any options set to "yes" or "no" and NOT the "yes" or "no" themselves
@@ -21,7 +21,7 @@ class harvestCPU:
         # details about two processing units
         if line.strip():
             if line.rstrip('\n').startswith('model name'):
-                cpu.append(line.rstrip('\n').split(':')[1])
+                cpu.append(line.rstrip('\n').lstrip(' ').split(':')[1].split('@')[0].strip())
                 
     # returns, example:
     # model , frequency, num_cpu
