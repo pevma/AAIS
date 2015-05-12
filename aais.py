@@ -44,7 +44,7 @@ if __name__ == "__main__":
   systemCpu = Harvest.CPU().getCPU()
   # note strip() is used below in order for the yaml.dump
   # to not put ' ' around the string
-  inventory["CPU"]["Model"] = systemCpu[0].split('@')[0].strip()
+  inventory["CPU"]["Model"] = systemCpu[0]
   inventory["CPU"]["Frequency"] = systemCpu[1]
   inventory["CPU"]["Count"] = systemCpu[2]
   
