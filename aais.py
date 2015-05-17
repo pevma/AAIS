@@ -59,6 +59,10 @@ if __name__ == "__main__":
   # returns Interface : Interrupts dictionary
   interfacesInterrupts = Harvest.NIC().getInterrupts()
   inventory["Interface_Interrupts"] = interfacesInterrupts
+  
+  inventory["Interface_Stats"] = {}
+  interfaceStats = Harvest.NIC().getInterfaceStats()
+  inventory["Interface_Stats"] = interfaceStats
    
   
   with open('SysInventory.yml', 'w') as yaml_file:

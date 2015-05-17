@@ -12,6 +12,7 @@ import re
 import sys
 import time
 import glob
+import subprocess
 
 class NIC:
   
@@ -72,4 +73,37 @@ class NIC:
     
     #print "net_interfaces ->", net_interfaces
     return net_interfaces
+  
+  def getInterfaceStats(self):
+    multi_interface_stats = {}
+    
+    intf_available = self.getInterfaces()
+    
+    for interface in intf_available:
+      interface_stats_list = []
+      interface_stats_list = subprocess.Popen(["ethtool", "-S", interface], stdout=subprocess.PIPE).communicate()[0].split("\n")
+      
+      # Delete the first line  - NIC statistics:
+      del interface_stats_list[0]
+      # Filter non present and empty values
+      interface_stats_list = filter(None, interface_stats_list)
+      
+      # Create the dictionary
+      interface_stats =  {k:v for k,v in (x.split(':') for x in interface_stats_list) }
+      # strip spaces and tabs
+      interface_stats =  dict(map(str.strip,x) for x in interface_stats.items())
+      #for key, value in interface_stats.items(): print key, '>', value
+      
+      multi_interface_stats[interface] = interface_stats
+      
+    
+    return multi_interface_stats
+
+
+
+
+
+
+
+
 
