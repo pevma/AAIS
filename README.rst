@@ -13,7 +13,7 @@ The idea is to be able to collect useful for the tuning of Suricata information 
 How to use
 ==========
 
-Make sure you have python and python yaml installed.On Debian/Ubuntu like systems - ``apt-get install python python-yaml``.
+Make sure you have python and python yaml installed.On Debian/Ubuntu like systems - ``apt-get install python python-yaml ethtool``.
 
 To run the script: ::
 
