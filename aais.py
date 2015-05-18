@@ -60,10 +60,16 @@ if __name__ == "__main__":
   interfacesInterrupts = Harvest.NIC().getInterrupts()
   inventory["Interface_Interrupts"] = interfacesInterrupts
   
+  # ethtool -S eth0
   inventory["Interface_Stats"] = {}
   interfaceStats = Harvest.NIC().getInterfaceStats()
   inventory["Interface_Stats"] = interfaceStats
-   
+  
+  # ethtool -i eth0
+  inventory["Interface_Driver_Info"] = {}
+  interfaceDriverInfo = Harvest.NIC().getInterfaceDriverInfo()
+  inventory["Interface_Driver_Info"] = interfaceDriverInfo
+  
   
   with open('SysInventory.yml', 'w') as yaml_file:
     yaml_file.write( yaml.dump(inventory, default_flow_style=False))

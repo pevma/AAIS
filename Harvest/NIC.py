@@ -98,7 +98,31 @@ class NIC:
       
     
     return multi_interface_stats
-
+  
+  def getInterfaceDriverInfo(self):
+    multi_interface_driver_info = {}
+    
+    intf_available = self.getInterfaces()
+    
+    for interface in intf_available:
+      interface_driver_info_list = []
+      interface_driver_info_list = subprocess.Popen(["ethtool", "-i", interface], stdout=subprocess.PIPE).communicate()[0].split("\n")
+      
+      # Delete the first line  - NIC statistics:
+      del interface_driver_info_list[0]
+      # Filter non present and empty values
+      interface_driver_info_list = filter(None, interface_driver_info_list)
+      
+      # Create the dictionary, splitting on the first occurrence of ":"
+      interface_driver =  {k:v for k,v in (x.split(':',1) for x in interface_driver_info_list) }
+      # strip spaces and tabs
+      interface_driver =  dict(map(str.strip,x) for x in interface_driver.items())
+      #for key, value in interface_driver.items(): print key, '>', value
+      
+      multi_interface_driver_info[interface] = interface_driver
+      
+    
+    return multi_interface_driver_info
 
 
 
