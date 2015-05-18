@@ -108,8 +108,6 @@ class NIC:
       interface_driver_info_list = []
       interface_driver_info_list = subprocess.Popen(["ethtool", "-i", interface], stdout=subprocess.PIPE).communicate()[0].split("\n")
       
-      # Delete the first line  - NIC statistics:
-      del interface_driver_info_list[0]
       # Filter non present and empty values
       interface_driver_info_list = filter(None, interface_driver_info_list)
       
