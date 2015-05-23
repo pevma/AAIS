@@ -21,12 +21,12 @@ class CPU:
         # details about two processing units
         if line.strip():
             if line.rstrip('\n').startswith('model name'):
-                cpu.append(line.rstrip('\n').lstrip(' ').split(':')[1].split('@')[0].strip())
+                cpu.append(line.rstrip('\n').lstrip(' ').split(':')[1].strip())
                 
     # returns, example:
     # model , frequency, num_cpu
     cpuinfo.close()
-    return ( cpu[0], cpu[0].split()[-1], len(cpu) )
+    return ( cpu[0], cpu[1].split('@')[1].strip(), len(cpu) )
   
   
   
