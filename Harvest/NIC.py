@@ -19,7 +19,6 @@ class NIC:
   def getInterrupts(self):
     f_interrupts = open("/proc/interrupts", "r")
     f_interrupts.seek(0)
-    ts = int(time.time())
     
     # Get number of CPUs from description line.
     num_cpus = len(f_interrupts.readline().split())
@@ -38,11 +37,12 @@ class NIC:
         #print irq_type
         if irq_type.isalnum():
 	  if irq_type.isdigit():
-	    if cols[-2] == "PCI-MSI-edge" and interface and "TxRx" in cols[-1]:
+	    if ( "PCI-MSI-edge" in cols[-2] and interface in cols[-1] and "TxRx" in cols[-1]):
 	      irq_type = cols[-1]
 	      #print irq_type
 	      interrupts_num += 1
 	      
+      f_interrupts.seek(0)
       intf_interrupts[interface] = interrupts_num
     
     f_interrupts.close()
