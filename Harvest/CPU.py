@@ -26,7 +26,7 @@ class CPU:
     # returns, example:
     # model , frequency, num_cpu
     cpuinfo.close()
-    return ( cpu[0], cpu[0].split('@')[1].strip(), len(cpu) )
+    return ( cpu[0].split('@')[0].strip(), cpu[0].split('@')[1].strip(), len(cpu) )
   
   
   
